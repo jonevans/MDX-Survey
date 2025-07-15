@@ -1,8 +1,8 @@
 import axios from 'axios';
+import API_URL from '../config/api';
 
 const generateInsights = async (assessmentData) => {
   if (!assessmentData || !assessmentData.maturityLevel || !assessmentData.scoringSummary) {
-    console.error('Invalid assessment data:', assessmentData);
     return {
       summary: "Unable to generate insights due to invalid assessment data.",
       keyFindings: [],
@@ -12,8 +12,13 @@ const generateInsights = async (assessmentData) => {
   }
 
   try {
-    const response = await axios.post('/api/ai/generate-insights', {
+    const response = await axios.post(`${API_URL}/api/ai/generate-insights`, {
       assessmentData
+    }, {
+      headers: {
+        'x-auth-token': localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
     });
 
     if (!response.data || !response.data.insights) {
