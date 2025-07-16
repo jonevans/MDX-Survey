@@ -43,13 +43,9 @@ mongoose
     console.error('MongoDB Connection Error:', err);
   });
 
-// Routes
+// Routes - api.js handles most routes internally
 app.use('/api', require('./routes/api'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/admin', require('./routes/admin'));
-app.use('/api/reports', require('./routes/reports'));
-app.use('/api/responses', require('./routes/responses'));
-app.use('/api/ai', require('./routes/aiRoutes'));
+// Additional standalone routes
 app.use('/api/invites', require('./routes/inviteRoutes'));
 
 // Simple test route
