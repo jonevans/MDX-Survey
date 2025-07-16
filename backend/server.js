@@ -32,8 +32,12 @@ app.use(apiLimiter);
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
+// Determine frontend URL based on environment
+const frontendUrl = process.env.FRONTEND_URL || 
+  (process.env.NODE_ENV === 'production' ? 'https://dx-assessment-frontend.onrender.com' : 'http://localhost:3000');
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: frontendUrl,
   credentials: true,
   optionsSuccessStatus: 200
 }));
