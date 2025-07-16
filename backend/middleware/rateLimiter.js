@@ -25,6 +25,10 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
   // Skip successful requests (only count failed attempts)
   skipSuccessfulRequests: true,
+  // Skip rate limiting for development/testing
+  skip: (req) => {
+    return isDevelopment;
+  }
 });
 
 // More permissive rate limiting for authenticated users
