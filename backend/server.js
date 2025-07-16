@@ -27,8 +27,8 @@ app.use(helmet({
   },
 }));
 
-// Apply rate limiting to all requests (temporarily disabled for testing)
-// app.use(apiLimiter);
+// Apply rate limiting to all requests
+app.use(apiLimiter);
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
