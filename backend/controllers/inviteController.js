@@ -149,7 +149,9 @@ const addInvites = async (req, res) => {
 const getRegistrationUrls = async (req, res) => {
   try {
     const { surveyId } = req.params;
-    const { baseUrl = 'http://localhost:3000' } = req.query;
+    const defaultUrl = process.env.FRONTEND_URL || 
+      (process.env.NODE_ENV === 'production' ? 'https://dx-assessment-frontend.onrender.com' : 'http://localhost:3000');
+    const { baseUrl = defaultUrl } = req.query;
 
     const invites = await UserInvite.find({ 
       companySurvey: surveyId,
