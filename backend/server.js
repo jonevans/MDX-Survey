@@ -11,6 +11,9 @@ dotenv.config();
 // Initialize express app
 const app = express();
 
+// Trust proxy for rate limiting (required for Render deployment)
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: {
