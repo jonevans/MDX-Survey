@@ -61,11 +61,8 @@ userInviteSchema.pre('save', function(next) {
 });
 
 // Method to generate registration URL
-userInviteSchema.methods.getRegistrationUrl = function(baseUrl) {
-  const defaultUrl = process.env.FRONTEND_URL || 
-    (process.env.NODE_ENV === 'production' ? 'https://dx-assessment-frontend.onrender.com' : 'http://localhost:3000');
-  const url = baseUrl || defaultUrl;
-  return `${url}/register?token=${this.token}`;
+userInviteSchema.methods.getRegistrationUrl = function(baseUrl = 'http://localhost:3000') {
+  return `${baseUrl}/register?token=${this.token}`;
 };
 
 // Method to check if invite is valid
